@@ -55,17 +55,17 @@ public class PlayerController : MonoBehaviour
         }
         else if(direction.y < -.5f)
         {
-            newAction.direction = Direction.North;
+            newAction.direction = Direction.South;
             Debug.Log("Down");
         }
         else if (direction.x > .5f)
         {
-            newAction.direction = Direction.North;
+            newAction.direction = Direction.East;
             Debug.Log("Right");
         }
         else if (direction.x < -.5f)
         {
-            newAction.direction = Direction.North;
+            newAction.direction = Direction.West;
             Debug.Log("Left");
         }
         else return;
