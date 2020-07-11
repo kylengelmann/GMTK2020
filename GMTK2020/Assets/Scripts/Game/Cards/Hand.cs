@@ -13,6 +13,7 @@ public class Hand : MonoBehaviour
 
     private void Start()
     {
+        cards = new Card[cardPositions.Length];
         LevelManager.Get().OnLevelStateChange += OnLevelStateChange;
     }
 
@@ -55,7 +56,11 @@ public class Hand : MonoBehaviour
                     if(cards[i] == null)
                     {
                         cards[i] = newCard;
+                        newCardGO.transform.parent = cardPositions[i];
+                        newCardGO.transform.localScale = Vector3.one;
+                        newCardGO.transform.localPosition = Vector3.zero;
                         NumCards++;
+                        break;
                     }
                 }
             }
@@ -92,6 +97,7 @@ public class Hand : MonoBehaviour
             {
                 hoveredCard = null;
             }
+            else return;
         }
 
         foreach (Card card in cards)

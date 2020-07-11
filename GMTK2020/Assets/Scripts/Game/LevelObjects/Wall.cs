@@ -8,5 +8,7 @@ public class Wall : MonoBehaviour
     private void Start()
     {
         LevelGrid.Get().RegisterWall(this);
+
+        gameObject.SetActive(false);
     }
 }

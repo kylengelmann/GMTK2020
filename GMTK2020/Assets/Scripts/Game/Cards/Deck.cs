@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
@@ -8,22 +9,31 @@ public class Deck : MonoBehaviour
 
     public int GetNumCards() {return cards.Count;}
 
+    public Text cardCount;
+
     public void Init(in DeckCardData[] inDeckData)
     {
         cards = new List<CardData>();
-        for(int i = 0; i < inDeckData.Length; ++i)
+
+        if(inDeckData != null)
         {
-            for(int j = 0; j < inDeckData[i].numCards; j++)
+            for(int i = 0; i < inDeckData.Length; ++i)
             {
-                cards.Add(inDeckData[i].cardData);
+                for(int j = 0; j < inDeckData[i].numCards; j++)
+                {
+                    cards.Add(inDeckData[i].cardData);
+                }
             }
+            Shuffle();
         }
-        Shuffle();
+
+        cardCount.text = GetNumCards().ToString();
     }
 
     public void AddCardToEnd(in CardData cardData)
     {
         cards.Add(cardData);
+        cardCount.text = GetNumCards().ToString();
     }
 
     public void AddAndShuffle(Deck deck)
@@ -31,6 +41,7 @@ public class Deck : MonoBehaviour
         cards.AddRange(deck.cards);
         deck.Empty();
         Shuffle();
+        cardCount.text = GetNumCards().ToString();
     }
 
     void Shuffle()
@@ -48,12 +59,14 @@ public class Deck : MonoBehaviour
     {
         CardData retVal = cards[cards.Count - 1];
         cards.RemoveAt(cards.Count - 1);
+        cardCount.text = GetNumCards().ToString();
         return retVal;
     }
 
     public void Empty()
     {
         cards.Clear();
+        cardCount.text = GetNumCards().ToString();
     }
 }
 

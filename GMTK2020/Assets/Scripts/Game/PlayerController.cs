@@ -82,4 +82,13 @@ public class PlayerController : MonoBehaviour
 
         ActionManager.Get().StartProcessingQueue(playerObject);
     }
+
+    private void Update()
+    {
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 0f));
+
+        LevelManager.Get().hand.UpdateCardHover(mousePos);
+    }
 }

@@ -86,6 +86,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b071cdb7e85eb434c919f5fce0e72f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deckPrefab: {fileID: 8685506771564278713, guid: d2e968d3eb9a37b488d6965b7a8ff240,
+    type: 3}
+  handPrefab: {fileID: 8652674017834769606, guid: 9d51211f31b96fa478ad438d2a282ac2,
+    type: 3}
+  deckPosiiton: {fileID: 0}
+  handPosition: {fileID: 0}
+  discardPosition: {fileID: 0}
 --- !u!1 &8023610661526547095
 GameObject:
   m_ObjectHideFlags: 0

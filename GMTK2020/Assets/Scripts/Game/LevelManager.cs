@@ -19,24 +19,32 @@ public class LevelManager : Singleton<LevelManager>
     protected override void Awake()
     {
         base.Awake();
+
+        GameObject deckGO = Instantiate(deckPrefab, deckPosiiton);
+        deckGO.transform.localPosition = Vector3.zero;
+        deck = deckGO.GetComponent<Deck>();
+
+        GameObject handGO = Instantiate(handPrefab, handPosition);
+        handGO.transform.localPosition = Vector3.zero;
+        hand = handGO.GetComponent<Hand>();
+
+        GameObject discardGO = Instantiate(deckPrefab, discardPosition);
+        discardGO.transform.localPosition = Vector3.zero;
+        discard = discardGO.GetComponent<Deck>();
     }
 
     private void Start()
     {
-        GameObject deckGO = Instantiate(deckPrefab, deckPosiiton);
-        deck = deckGO.GetComponent<Deck>();
-        
-        GameObject handGO = Instantiate(handPrefab, handPosition);
-        hand = handGO.GetComponent<Hand>();
 
-        GameObject discardGO = Instantiate(deckPrefab, discardPosition);
-        discard = discardGO.GetComponent<Deck>();
     }
 
     public void InitializeLevel()
     {
         if(deck)
         deck.Init(GameManager.Get().currentDeck.ToArray());
+
+        if(discard)
+            discard.Init(null);
 
         SetLevelState(LevelState.FadeIn);
         StartCoroutine(FadeIn(1f));
