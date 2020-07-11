@@ -11,15 +11,39 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerObject = GetComponent<PlayerObject>();
+
         gameControls = new GameControls();
         gameControls.Debug.Move.performed += OnMove;
         gameControls.Debug.ProcessActions.performed += ProcessQueue;
-
         gameControls.Enable();
+
+        LevelManager.Get().OnLevelStateChange += OnLevelStateChange;
+    }
+
+
+    private void OnDestroy()
+    {
+        if(gameControls != null)
+        {
+            gameControls.Disable();
+            gameControls.Dispose();
+        }
+    }
+
+
+
+    void OnLevelStateChange(LevelState levelState)
+    {
+
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
+        if(LevelManager.Get().levelState != LevelState.PlayerTurn)
+        {
+            return;
+        }
+
         Vector2 direction = context.ReadValue<Vector2>();
         if(direction.y > .5f)
         {
@@ -45,12 +69,11 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessQueue(InputAction.CallbackContext context)
     {
-        ActionManager.Get().StartProcessingQueue(playerObject);
-    }
+        if (LevelManager.Get().levelState != LevelState.PlayerTurn)
+        {
+            return;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ActionManager.Get().StartProcessingQueue(playerObject);
     }
 }

@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    
+    private void Start()
+    {
+        LevelGrid.Get().RegisterDoor(this);
+    }
 }

@@ -10,6 +10,8 @@ public class LevelGrid : Singleton<LevelGrid>
     private bool[,] horizontalWallData;
     private bool[,] verticalWallData;
 
+    private Vector2Int doorPosition;
+
     public const float cellSize = 1f;
 
     protected override void Awake()
@@ -79,6 +81,8 @@ public class LevelGrid : Singleton<LevelGrid>
                 break;
         }
 
+        if(newPosition == doorPosition) return true;
+
         return IsValidGridPosition(newPosition) && gridData[newPosition.x, newPosition.y] == ObjectType.None;
         
     }
@@ -86,7 +90,7 @@ public class LevelGrid : Singleton<LevelGrid>
     public void MoveObject(LevelObject levelObject, in Vector2Int newPosition)
     {
         Vector2Int currentPosition = levelObject.GetGridCell();
-        if(!IsValidGridPosition(currentPosition) || !IsValidGridPosition(newPosition))
+        if(!IsValidGridPosition(currentPosition))
         {
             return;
         }
@@ -101,6 +105,17 @@ public class LevelGrid : Singleton<LevelGrid>
         }
         else
         {
+            if(newPosition == doorPosition)
+            {
+                levelObject.transform.position = GridToWorldLocation(newPosition, levelObject.transform.position.z);
+                LevelManager.Get().OnPlayerMoveToDoor();
+            }
+
+            if (!IsValidGridPosition(newPosition))
+            {
+                return;
+            }
+
             if (gridData[newPosition.x, newPosition.y] == ObjectType.None)
             {
                 gridData[currentPosition.x, currentPosition.y] = ObjectType.None;
@@ -190,6 +205,11 @@ public class LevelGrid : Singleton<LevelGrid>
                 }
             }
         }
+    }
+
+    public void RegisterDoor(Door door)
+    {
+        doorPosition = WorldToGridLocation(new Vector2(door.transform.position.x, door.transform.position.y));
     }
 
     bool IsValidWallPosition(in Vector2Int position)

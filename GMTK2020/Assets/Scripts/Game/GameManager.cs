@@ -3,7 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private LevelData[] levelData;
+    [SerializeField] private int[] sceneIdxs;
+
+    private int currentLevel = -1;
 
     [Header("Debug")]
     [SerializeField] private int DEBUG_LevelToOpen = 0;
@@ -23,9 +25,18 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
+    public void LevelComplete()
+    {
+        if (currentLevel < sceneIdxs.Length - 1)
+        {
+            LoadLevel(currentLevel + 1);
+        }
+    }
+
     void LoadLevel(int LevelToLoad)
     {
-        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelData[LevelToLoad].SceneIdx, LoadSceneMode.Single);
+        currentLevel = LevelToLoad;
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIdxs[LevelToLoad], LoadSceneMode.Single);
         loadOperation.completed += OnLevelLoadComplete;
     }
 

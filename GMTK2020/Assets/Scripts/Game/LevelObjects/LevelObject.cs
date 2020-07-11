@@ -38,15 +38,10 @@ public abstract class LevelObject : MonoBehaviour
                 break;
         }
 
-        if(currentGrid.IsValidGridPosition(newGridCell))
-        {
-            currentGrid.MoveObject(this, newGridCell);
-            gridCell = newGridCell;
+        currentGrid.MoveObject(this, newGridCell);
+        gridCell = newGridCell;
 
-            return true;
-        }
-        
-        return false;
+        return true;
     }
 }
 
