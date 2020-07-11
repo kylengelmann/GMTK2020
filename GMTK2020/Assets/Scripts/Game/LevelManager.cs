@@ -35,6 +35,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void InitializeLevel()
     {
+        if(deck)
         deck.Init(GameManager.Get().currentDeck.ToArray());
 
         SetLevelState(LevelState.FadeIn);
