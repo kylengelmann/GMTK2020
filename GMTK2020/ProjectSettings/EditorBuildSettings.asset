@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestLevel2.unity
     guid: 32f1481346df42046bbe285509c2c2e8
+  - enabled: 1
+    path: Assets/Scenes/perry1.unity
+    guid: 609d262d1a351164a9fec26bb2e0b848
   m_configObjects: {}
