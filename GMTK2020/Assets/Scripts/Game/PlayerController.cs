@@ -44,27 +44,33 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        ActionData newAction;
+        newAction.type = ActionType.Move;
+
         Vector2 direction = context.ReadValue<Vector2>();
         if(direction.y > .5f)
         {
-            ActionManager.Get().AddActionToQueue(ActionType.MoveUp);
+            newAction.direction = Direction.North;
             Debug.Log("Up");
         }
         else if(direction.y < -.5f)
         {
-            ActionManager.Get().AddActionToQueue(ActionType.MoveDown);
+            newAction.direction = Direction.North;
             Debug.Log("Down");
         }
         else if (direction.x > .5f)
         {
-            ActionManager.Get().AddActionToQueue(ActionType.MoveRight);
+            newAction.direction = Direction.North;
             Debug.Log("Right");
         }
         else if (direction.x < -.5f)
         {
+            newAction.direction = Direction.North;
             Debug.Log("Left");
-            ActionManager.Get().AddActionToQueue(ActionType.MoveLeft);
         }
+        else return;
+
+        ActionManager.Get().AddActionToQueue(newAction);
     }
 
     private void ProcessQueue(InputAction.CallbackContext context)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -6,6 +7,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int[] sceneIdxs;
 
     private int currentLevel = -1;
+
+    public DeckData startingDeck;
+
+    public List<DeckCardData> currentDeck { get; private set; }
 
     [Header("Debug")]
     [SerializeField] private int DEBUG_LevelToOpen = 0;
@@ -18,11 +23,19 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        currentDeck = new List<DeckCardData>();
+        currentDeck.AddRange(startingDeck.cardData);
+
 #if UNITY_EDITOR
         LoadLevel(DEBUG_LevelToOpen);
 #else
         LoadLevel(0);
 #endif
+    }
+
+    public void AddCardPack(DeckData cardPack)
+    {
+        currentDeck.AddRange(cardPack.cardData);
     }
 
     public void LevelComplete()

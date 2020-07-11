@@ -5,8 +5,38 @@ using System;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    public GameObject deckPrefab;
+    public GameObject handPrefab;
+
+    public Transform deckPosiiton;
+    public Transform handPosition;
+    public Transform discardPosition;
+
+    public Deck deck {get; private set;}
+    public Hand hand {get; private set;}
+    public Deck discard {get; private set;}
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    private void Start()
+    {
+        GameObject deckGO = Instantiate(deckPrefab, deckPosiiton);
+        deck = deckGO.GetComponent<Deck>();
+        
+        GameObject handGO = Instantiate(handPrefab, handPosition);
+        hand = handGO.GetComponent<Hand>();
+
+        GameObject discardGO = Instantiate(deckPrefab, discardPosition);
+        discard = discardGO.GetComponent<Deck>();
+    }
+
     public void InitializeLevel()
     {
+        deck.Init(GameManager.Get().currentDeck.ToArray());
+
         SetLevelState(LevelState.FadeIn);
         StartCoroutine(FadeIn(1f));
     }
@@ -61,6 +91,11 @@ public class LevelManager : Singleton<LevelManager>
     {
         yield return new WaitForSeconds(FadeTime);
         GameManager.Get().LevelComplete();
+    }
+
+    public void ShuffleDiscardIntoDeck()
+    {
+        deck.AddAndShuffle(discard);
     }
 }
 

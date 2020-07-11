@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class ActionManager : Singleton<ActionManager>
 {
-    Queue<ActionType> ActionQueue;
+    Queue<ActionData> ActionQueue;
 
     protected override void Awake()
     {
         base.Awake();
 
-        ActionQueue = new Queue<ActionType>();
+        ActionQueue = new Queue<ActionData>();
     }
 
     bool bIsProcessingQueue = false;
 
-    public void AddActionToQueue(ActionType actionType)
+    public void AddActionToQueue(ActionData actionData)
     {
         if(!bIsProcessingQueue)
         {
-            ActionQueue.Enqueue(actionType);
+            ActionQueue.Enqueue(actionData);
         }
     }
 
@@ -35,23 +35,14 @@ public class ActionManager : Singleton<ActionManager>
     {
         bIsProcessingQueue = true;
 
-        ActionType currentAction;
+        ActionData currentAction;
         while(ActionQueue.Count > 0)
         {
             currentAction = ActionQueue.Dequeue();
-            switch(currentAction)
+            switch(currentAction.type)
             {
-                case ActionType.MoveUp:
-                    yield return actionObject.StartMove(Direction.North);
-                    break;
-                case ActionType.MoveDown:
-                    yield return actionObject.StartMove(Direction.South);
-                    break;
-                case ActionType.MoveLeft:
-                    yield return actionObject.StartMove(Direction.West);
-                    break;
-                case ActionType.MoveRight:
-                    yield return actionObject.StartMove(Direction.East);
+                case ActionType.Move:
+                    yield return actionObject.StartMove(currentAction.direction);
                     break;
                 case ActionType.Attack:
                     yield return actionObject.StartAttack();
@@ -66,9 +57,13 @@ public class ActionManager : Singleton<ActionManager>
 
 public enum ActionType
 {
-    MoveUp = 0,
-    MoveDown = 1,
-    MoveLeft = 2,
-    MoveRight = 4,
-    Attack = 5,
+    Move = 0,
+    Attack = 1,
+    Defend = 2,
+}
+
+public struct ActionData
+{
+    public ActionType type;
+    public Direction direction;
 }
