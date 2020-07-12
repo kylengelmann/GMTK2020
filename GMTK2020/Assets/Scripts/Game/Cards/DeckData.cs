@@ -4,4 +4,5 @@
 public class DeckData : ScriptableObject
 {
     public DeckCardData[] cardData;
+    public Sprite pickupDisplay;
 }

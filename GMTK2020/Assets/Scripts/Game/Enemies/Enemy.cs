@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     public Coroutine StartTurn()
     {
+        enemyObject.StartTurn();
         return StartCoroutine(TakeTurn());
     }
 

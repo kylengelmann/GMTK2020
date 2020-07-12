@@ -16,6 +16,8 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public Action OnCharacterDeath;
 
+    bool bIsDefending = false;
+
     protected override void Start()
     {
         base.Start();
@@ -23,6 +25,11 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
         animaAnimator = GetComponentInChildren<Animator>();
 
         animaAnimator.SetInteger("dirintion", 2);
+    }
+
+    public void StartTurn()
+    {
+        bIsDefending = false;
     }
 
     public virtual Coroutine StartMove(Direction direction)
@@ -36,6 +43,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     protected virtual IEnumerator PerformMove(Direction direction)
     {
+        bIsDefending = false;
         bool bCanMove = currentGrid.CanMoveDirection(GetGridCell(), direction);
         Vector3 startPosition = transform.position;
         float currentMoveTime = 0f;
@@ -67,6 +75,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public virtual Coroutine StartAttack(Direction direction)
     {
+        bIsDefending = false;
         animaAnimator.SetInteger("attintck", (int) direction);
         animaAnimator.ResetTrigger("actriggerion");
         animaAnimator.SetTrigger("actriggerion");
@@ -103,6 +112,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public virtual Coroutine StartDefend()
     {
+        bIsDefending = true;
         return StartCoroutine(PerformDefend());
     }
 
@@ -113,6 +123,11 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public void Damage()
     {
+        if(bIsDefending)
+        {
+            bIsDefending = false;
+            return;
+        }
         health--;
         if(health < 1)
         {

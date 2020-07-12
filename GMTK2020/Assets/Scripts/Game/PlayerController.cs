@@ -88,7 +88,10 @@ public class PlayerController : MonoBehaviour
 
     void OnLevelStateChange(LevelState levelState)
     {
-
+        if(levelState == LevelState.PlayerTurn)
+        {
+            playerObject.StartTurn();
+        }
     }
 
     private void Update()

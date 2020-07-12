@@ -173,7 +173,10 @@ public class LevelGrid : Singleton<LevelGrid>
         if(registeredObjects.Remove(levelObject))
         {
             Vector2Int pos = levelObject.GetGridCell();
-            gridData[pos.x, pos.y] = ObjectType.None;
+            if(gridData[pos.x, pos.y] == levelObject.GetObjectType())
+            {
+                gridData[pos.x, pos.y] = ObjectType.None;
+            }
         }
     }
 

@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupObject : MonoBehaviour
+public abstract class PickupObject : LevelObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override ObjectType GetObjectType() {return ObjectType.None;}
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnPickedUp()
     {
-        
+        LevelGrid.Get().UnregisterLevelObject(this);
+        Destroy(gameObject);
     }
+}
+
+public enum PickupType
+{
+    Energy = 0,
+    Cards = 1,
 }

@@ -60,6 +60,7 @@ public class LevelManager : Singleton<LevelManager>
     IEnumerator FadeIn(float fadeTime)
     {
         SetLevelState(LevelState.FadeIn);
+        GameManager.Get().FadeScreen(false, fadeTime);
         yield return new WaitForSeconds(fadeTime);
         SetLevelState(LevelState.PlayerTurn);
     }
@@ -86,6 +87,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if(levelState == LevelState.PlayerTurn)
         {
+            if(hand.HasSelectedCard()) return;
             SetLevelState(LevelState.EnemyTurn);
         }
     }
@@ -106,6 +108,7 @@ public class LevelManager : Singleton<LevelManager>
     IEnumerator FadeOut(float FadeTime, bool bReset = false)
     {
         SetLevelState(LevelState.FadeOut);
+        GameManager.Get().FadeScreen(true, FadeTime);
         yield return new WaitForSeconds(FadeTime);
         if(bReset)
         {
@@ -129,6 +132,11 @@ public class LevelManager : Singleton<LevelManager>
         {
             OnPlayerDied.Invoke();
         }
+    }
+
+    public void DisplayCardPickup(Sprite sprite)
+    {
+
     }
 }
 

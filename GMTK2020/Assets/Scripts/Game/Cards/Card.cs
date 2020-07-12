@@ -6,10 +6,15 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
     public CardData cardData {get; private set;}
+    public float hoveredScale = 1.2f;
+    public Vector3 hoveredTranslation;
+    public float selectedScale = .9f;
+    public Vector3 selectedTranslation;
 
     new BoxCollider2D collider2D;
 
     bool bIsHovered = false;
+    bool bIsClicked = false;
 
     public void Awake()
     {
@@ -24,17 +29,22 @@ public class Card : MonoBehaviour
 
     }
 
-    public void OnClicked()
+    public void SetClicked(bool bIsClicked)
     {
-
+        if(this.bIsClicked == bIsClicked) return;
+        this.bIsClicked = bIsClicked;
+        transform.localScale = Vector3.one *(bIsClicked ? selectedScale : (bIsHovered ? hoveredScale : 1f));
+        transform.localPosition = bIsClicked ? selectedTranslation : (bIsHovered ? hoveredTranslation : Vector3.zero);
     }
+
 
     public void SetHover(bool bNewHover)
     {
-        if(bNewHover == bIsHovered) return;
+        if(bNewHover == bIsHovered || bIsClicked) return;
         bIsHovered = bNewHover;
 
-        transform.localScale = Vector3.one * (bIsHovered ? 1.2f : 1f);
+        transform.localScale = Vector3.one * (bIsHovered ? hoveredScale : 1f);
+        transform.localPosition = bIsHovered ? hoveredTranslation : Vector3.zero;
     }
 
     public bool IsMouseHovering(Vector2 mousePositionWorld)

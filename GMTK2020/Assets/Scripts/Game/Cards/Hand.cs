@@ -11,6 +11,7 @@ public class Hand : MonoBehaviour
 
     int hoveredCardIdx = -1;
     int selectedCardIdx = -1;
+    public bool HasSelectedCard() {return selectedCardIdx > 0;}
 
     int actionIdx = 0;
 
@@ -22,12 +23,19 @@ public class Hand : MonoBehaviour
         LevelManager.Get().OnLevelStateChange += OnLevelStateChange;
     }
 
+    bool bIsLocked = true;
+
     void OnLevelStateChange(LevelState levelState)
     {
         if(levelState == LevelState.PlayerTurn)
         {
+            bIsLocked = false;
             FillHand();
             Energy = GameManager.Get().MaxEnergy;
+        }
+        else
+        {
+            bIsLocked = true;
         }
     }
 
@@ -96,17 +104,19 @@ public class Hand : MonoBehaviour
 
     public void OnClick()
     {
+        if(bIsLocked) return;
         if(hoveredCardIdx >= 0)
         {
             selectedCardIdx = hoveredCardIdx;
             hoveredCardIdx = -1;
-            cards[selectedCardIdx].OnClicked();
+            cards[selectedCardIdx].SetClicked(true);
         }
     }
 
     public void OnDirectionSelected(Direction direction)
     {
-        if(selectedCardIdx >= 0)
+        if (bIsLocked) return;
+        if (selectedCardIdx >= 0)
         {
             if(actionIdx >= cards[selectedCardIdx].cardData.actions.Length) return;
 
@@ -136,11 +146,12 @@ public class Hand : MonoBehaviour
 
     public void OnEscapePressed()
     {
-        if(selectedCardIdx >= 0)
+        if (bIsLocked) return;
+        if (selectedCardIdx >= 0)
         {
             if(actionIdx == 0)
             {
-                cards[selectedCardIdx].SetHover(false);
+                cards[selectedCardIdx].SetClicked(false);
                 selectedCardIdx = -1;
             }
         }
@@ -148,7 +159,8 @@ public class Hand : MonoBehaviour
 
     public void OnDiscardPressed()
     {
-        if(selectedCardIdx >= 0)
+        if (bIsLocked) return;
+        if (selectedCardIdx >= 0)
         {
             if(actionIdx == 0)
             {
@@ -161,8 +173,14 @@ public class Hand : MonoBehaviour
 
     public void UpdateCardHover(Vector2 mousePositionWorld)
     {
-        if(selectedCardIdx >= 0) return;
-        if (hoveredCardIdx >= 0)
+        if (selectedCardIdx >= 0)
+        {
+            bool bIsHovered = cards[selectedCardIdx].IsMouseHovering(mousePositionWorld);
+            cards[selectedCardIdx].SetHover(bIsHovered);
+            return;
+        }
+
+        if (hoveredCardIdx >= 0 && !bIsLocked)
         {
             if (!cards[hoveredCardIdx].IsMouseHovering(mousePositionWorld))
             {
@@ -176,7 +194,7 @@ public class Hand : MonoBehaviour
             Card card = cards[cardIdx];
             if(card == null) continue;
 
-            if (hoveredCardIdx < 0)
+            if (hoveredCardIdx < 0 && !bIsLocked)
             {
                 if (card.IsMouseHovering(mousePositionWorld))
                 {
@@ -188,5 +206,10 @@ public class Hand : MonoBehaviour
 
             card.SetHover(false);
         }
+    }
+
+    public void AddEnergy()
+    {
+        Energy++;
     }
 }

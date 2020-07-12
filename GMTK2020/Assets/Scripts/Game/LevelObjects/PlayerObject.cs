@@ -19,9 +19,28 @@ public class PlayerObject : CharacterObject
 
     protected override IEnumerator PerformMove(Direction direction)
     {
-
+        Vector2Int pickupCell = GetGridCell();
+        switch (direction)
+        {
+            case Direction.North:
+                pickupCell += Vector2Int.up;
+                break;
+            case Direction.South:
+                pickupCell += Vector2Int.down;
+                break;
+            case Direction.East:
+                pickupCell += Vector2Int.right;
+                break;
+            case Direction.West:
+                pickupCell += Vector2Int.left;
+                break;
+        }
+        PickupObject pickup = LevelGrid.Get().GetObjectAtGridPosition(pickupCell) as PickupObject;
         yield return base.PerformMove(direction);
-
+        if(pickup)
+        {
+            pickup.OnPickedUp();
+        }
     }
 
 }

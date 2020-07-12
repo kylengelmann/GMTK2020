@@ -17,6 +17,20 @@ public class GameManager : Singleton<GameManager>
 
     public Sprite[] Didgets;
 
+    public ScreenFade screenFade;
+
+    public void FadeScreen(bool bFadeOut, float time)
+    {
+        if(bFadeOut)
+        {
+            screenFade.FadeOut(time);
+        }
+        else
+        {
+            screenFade.FadeIn(time);
+        }
+    }
+
     [Header("Debug")]
     [SerializeField] private int DEBUG_LevelToOpen = 0;
 
