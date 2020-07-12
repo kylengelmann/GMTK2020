@@ -361,7 +361,7 @@ PrefabInstance:
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: sceneIdxs.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
@@ -376,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: DEBUG_LevelToOpen
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
@@ -403,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneIdxs.Array.data[5]
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
+        type: 3}
+      propertyPath: sceneIdxs.Array.data[6]
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579111, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
