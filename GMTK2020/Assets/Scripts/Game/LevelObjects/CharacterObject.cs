@@ -25,6 +25,8 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
         animaAnimator = GetComponentInChildren<Animator>();
 
         animaAnimator.SetInteger("dirintion", 2);
+        animaAnimator.ResetTrigger("moveTrigger");
+        animaAnimator.ResetTrigger("actriggerion");
     }
 
     public void StartTurn()
@@ -39,7 +41,6 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
         int dirintion = (int)direction;
         animaAnimator.SetInteger("dirintion", dirintion);
 
-        animaAnimator.SetTrigger("moveTrigger");
         animaAnimator.ResetTrigger("moveTrigger");
         animaAnimator.SetTrigger("moveTrigger");
 
