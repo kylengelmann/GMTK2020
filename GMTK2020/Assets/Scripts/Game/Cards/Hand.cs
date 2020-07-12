@@ -24,6 +24,7 @@ public class Hand : MonoBehaviour
     }
 
     bool bIsLocked = true;
+    public bool bPaused = false;
 
     void OnLevelStateChange(LevelState levelState)
     {
@@ -104,7 +105,7 @@ public class Hand : MonoBehaviour
 
     public void OnClick()
     {
-        if(bIsLocked) return;
+        if(bIsLocked || bPaused) return;
         if(hoveredCardIdx >= 0)
         {
             selectedCardIdx = hoveredCardIdx;
@@ -115,7 +116,7 @@ public class Hand : MonoBehaviour
 
     public void OnDirectionSelected(Direction direction)
     {
-        if (bIsLocked) return;
+        if (bIsLocked || bPaused) return;
         if (selectedCardIdx >= 0)
         {
             if(actionIdx >= cards[selectedCardIdx].cardData.actions.Length) return;
@@ -146,7 +147,7 @@ public class Hand : MonoBehaviour
 
     public void OnEscapePressed()
     {
-        if (bIsLocked) return;
+        if (bIsLocked || bPaused) return;
         if (selectedCardIdx >= 0)
         {
             if(actionIdx == 0)
@@ -159,7 +160,7 @@ public class Hand : MonoBehaviour
 
     public void OnDiscardPressed()
     {
-        if (bIsLocked) return;
+        if (bIsLocked || bPaused) return;
         if (selectedCardIdx >= 0)
         {
             if(actionIdx == 0)
@@ -180,7 +181,7 @@ public class Hand : MonoBehaviour
             return;
         }
 
-        if (hoveredCardIdx >= 0 && !bIsLocked)
+        if (hoveredCardIdx >= 0 && !bIsLocked && !bPaused)
         {
             if (!cards[hoveredCardIdx].IsMouseHovering(mousePositionWorld))
             {
@@ -194,7 +195,7 @@ public class Hand : MonoBehaviour
             Card card = cards[cardIdx];
             if(card == null) continue;
 
-            if (hoveredCardIdx < 0 && !bIsLocked)
+            if (hoveredCardIdx < 0 && !bIsLocked && !bPaused)
             {
                 if (card.IsMouseHovering(mousePositionWorld))
                 {

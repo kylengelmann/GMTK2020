@@ -20,6 +20,7 @@ public class ActionManager : Singleton<ActionManager>
     }
 
     bool bFreeze = false;
+    public bool bPaused = false;
     void OnPlayerDied()
     {
         bFreeze = true;
@@ -47,7 +48,7 @@ public class ActionManager : Singleton<ActionManager>
         ActionData currentAction;
         while(ActionQueue.Count > 0)
         {
-            while(bFreeze)
+            while(bFreeze || bPaused)
             {
                 yield return null;
             }

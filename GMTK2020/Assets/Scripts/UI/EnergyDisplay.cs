@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class EnergyDisplay : MonoBehaviour
+public class EnergyDisplay : UIDisplay
 {
-    public Text text;
-
-    void Update()
+    protected override int GetDisplayNum()
     {
-        text.text = "X" + LevelManager.Get().hand.Energy.ToString();
+        return LevelManager.Get().hand.Energy;
     }
 }
