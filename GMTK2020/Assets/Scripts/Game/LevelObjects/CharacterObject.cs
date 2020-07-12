@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 {
+    public AudioClip[] actionClips;
+    AudioSource audioSouce;
+
     [SerializeField] float moveTime = .5f;
     public AnimationCurve MoveCurve;
     public AnimationCurve BounceCurve;
@@ -27,6 +30,21 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
         animaAnimator.SetInteger("dirintion", 2);
         animaAnimator.ResetTrigger("moveTrigger");
         animaAnimator.ResetTrigger("actriggerion");
+
+        audioSouce = GetComponent<AudioSource>();
+    }
+
+    void PlayActionSound(ActionType actionType)
+    {
+        int actionIdx = (int)actionType;
+        if(actionIdx > 0 && actionIdx < actionClips.Length)
+        {
+            AudioClip actionClip = actionClips[actionIdx];
+            if(actionClip && audioSouce)
+            {
+                audioSouce.PlayOneShot(actionClip);
+            }
+        }
     }
 
     public void StartTurn()
@@ -37,6 +55,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public virtual Coroutine StartMove(Direction direction)
     {
+        PlayActionSound(ActionType.Move);
 
         int dirintion = (int)direction;
         animaAnimator.SetInteger("dirintion", dirintion);
@@ -82,6 +101,8 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public virtual Coroutine StartAttack(Direction direction)
     {
+        PlayActionSound(ActionType.Attack);
+
         bIsDefending = false;
         animaAnimator.SetBool("isDefending", bIsDefending);
         animaAnimator.SetInteger("attintck", (int) direction);
@@ -120,6 +141,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 
     public virtual Coroutine StartDefend()
     {
+        PlayActionSound(ActionType.Defend);
         bIsDefending = true;
         animaAnimator.SetBool("isDefending", bIsDefending);
         animaAnimator.SetTrigger("defTrig");

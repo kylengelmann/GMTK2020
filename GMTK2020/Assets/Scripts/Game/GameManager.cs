@@ -59,10 +59,9 @@ public class GameManager : Singleton<GameManager>
 
     public void LevelComplete()
     {
-        if (currentLevel < sceneIdxs.Length - 1)
-        {
-            LoadLevel(currentLevel + 1);
-        }
+        currentLevel++;
+        currentLevel %= sceneIdxs.Length;
+        LoadLevel(currentLevel + 1);
     }
 
     public void ResetLevel()

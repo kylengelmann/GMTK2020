@@ -19,6 +19,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public float showCardTime = 3f;
     public SpriteRenderer cardDisplay;
+    public GameObject cardDisplayGO;
 
     [NonSerialized] public PlayerObject playerObject;
 
@@ -153,7 +154,9 @@ public class LevelManager : Singleton<LevelManager>
     {
         SetPause(true);
         cardDisplay.sprite = sprite;
+        if(cardDisplayGO) cardDisplayGO.SetActive(true);
         yield return new WaitForSeconds(showCardTime);
+        if (cardDisplayGO) cardDisplayGO.SetActive(false);
         cardDisplay.sprite = null;
         SetPause(false);
     }
