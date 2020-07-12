@@ -8,6 +8,9 @@ public class GameManager : Singleton<GameManager>
 
     private int currentLevel = -1;
 
+    public int MaxEnergy = 5;
+    public int DiscardCost = 1;
+
     public DeckData startingDeck;
 
     public List<DeckCardData> currentDeck { get; private set; }

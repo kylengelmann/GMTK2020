@@ -11,16 +11,14 @@ public class ActionManager : Singleton<ActionManager>
         base.Awake();
 
         ActionQueue = new Queue<ActionData>();
+        bIsProcessingQueue = false;
     }
 
-    bool bIsProcessingQueue = false;
+    public bool bIsProcessingQueue {get; private set;}
 
     public void AddActionToQueue(ActionData actionData)
     {
-        if(!bIsProcessingQueue)
-        {
-            ActionQueue.Enqueue(actionData);
-        }
+        ActionQueue.Enqueue(actionData);
     }
 
     public void StartProcessingQueue(IActionObject actionObject)
@@ -46,6 +44,9 @@ public class ActionManager : Singleton<ActionManager>
                     break;
                 case ActionType.Attack:
                     yield return actionObject.StartAttack();
+                    break;
+                case ActionType.Defend:
+                    yield return actionObject.StartDefend();
                     break;
             }
         }

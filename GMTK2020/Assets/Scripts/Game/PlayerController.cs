@@ -13,12 +13,58 @@ public class PlayerController : MonoBehaviour
         playerObject = GetComponent<PlayerObject>();
 
         gameControls = new GameControls();
-        gameControls.Debug.Move.performed += OnMove;
-        gameControls.Debug.ProcessActions.performed += ProcessQueue;
+
+        gameControls.Game.Select.performed += OnSelect;
+        gameControls.Game.Escape.performed += OnEscape;
+        gameControls.Game.Discard.performed += OnDiscard;
+        gameControls.Game.North.performed += OnNorth;
+        gameControls.Game.South.performed += OnSouth;
+        gameControls.Game.East.performed += OnEast;
+        gameControls.Game.West.performed += OnWest;
+        gameControls.Game.EndTurn.performed += OnEndTurn;
+
         gameControls.Enable();
 
         LevelManager.Get().OnLevelStateChange += OnLevelStateChange;
     }
+
+    void OnSelect(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnClick();
+    }
+
+    void OnDiscard(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnDiscardPressed();
+    }
+
+    void OnEscape(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnEscapePressed();
+    }
+
+    void OnNorth(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnDirectionSelected(Direction.North);
+    }
+
+    void OnSouth(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnDirectionSelected(Direction.South);
+    }
+    void OnEast(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnDirectionSelected(Direction.East);
+    }
+    void OnWest(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().hand.OnDirectionSelected(Direction.West);
+    }
+    void OnEndTurn(InputAction.CallbackContext context)
+    {
+        
+    }
+
 
 
     private void OnDestroy()

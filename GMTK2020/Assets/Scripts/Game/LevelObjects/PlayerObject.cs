@@ -10,6 +10,13 @@ public class PlayerObject : LevelObject, IActionObject
     public AnimationCurve MoveCurve;
     public AnimationCurve BounceCurve;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        LevelManager.Get().playerObject = this;
+    }
+
     public Coroutine StartMove(Direction direction)
     {
         return StartCoroutine(PerformMove(direction));
@@ -48,10 +55,20 @@ public class PlayerObject : LevelObject, IActionObject
 
     public Coroutine StartAttack()
     {
-        return StartAttack();
+        return StartCoroutine(PerformAttack());
     }
 
     IEnumerator PerformAttack()
+    {
+        yield return new WaitForSeconds(.5f);
+    }
+
+    public Coroutine StartDefend()
+    {
+        return StartCoroutine(PerformDefend());
+    }
+
+    IEnumerator PerformDefend()
     {
         yield return new WaitForSeconds(.5f);
     }

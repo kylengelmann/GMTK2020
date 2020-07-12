@@ -16,6 +16,8 @@ public class LevelManager : Singleton<LevelManager>
     public Hand hand {get; private set;}
     public Deck discard {get; private set;}
 
+    public PlayerObject playerObject;
+
     protected override void Awake()
     {
         base.Awake();

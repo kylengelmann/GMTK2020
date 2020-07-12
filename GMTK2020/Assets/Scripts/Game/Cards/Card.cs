@@ -17,6 +17,8 @@ public class Card : MonoBehaviour
 
     bool bIsHovered = false;
 
+    bool bIsActive = false;
+
     public void Awake()
     {
         collider2D = GetComponent<BoxCollider2D>();
@@ -52,6 +54,7 @@ public class Card : MonoBehaviour
 
     public bool IsMouseHovering(Vector2 mousePositionWorld)
     {
+        if(LevelManager.Get().hand.Energy < cardData.cost) return false;
         return collider2D.OverlapPoint(mousePositionWorld);
     }
 }
@@ -61,4 +64,5 @@ public struct CardData
 {
     public ActionType[] actions;
     public int cost;
+    public Sprite sprite;
 }
