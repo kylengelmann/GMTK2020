@@ -39,6 +39,10 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
         int dirintion = (int)direction;
         animaAnimator.SetInteger("dirintion", dirintion);
 
+        animaAnimator.SetTrigger("moveTrigger");
+        animaAnimator.ResetTrigger("moveTrigger");
+        animaAnimator.SetTrigger("moveTrigger");
+
         return StartCoroutine(PerformMove(direction));
     }
 
