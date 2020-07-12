@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8685506771564278714}
   - component: {fileID: 6850246520870527458}
   m_Layer: 0
-  m_Name: Deck
+  m_Name: Discard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7024648501981196136, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+  m_Sprite: {fileID: -1145144668836272637, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -9,7 +9,8 @@ public class Deck : MonoBehaviour
 
     public int GetNumCards() {return cards.Count;}
 
-    public Text cardCount;
+    public SpriteRenderer tens;
+    public SpriteRenderer ones;
 
     public void Init(in DeckCardData[] inDeckData)
     {
@@ -27,13 +28,23 @@ public class Deck : MonoBehaviour
             Shuffle();
         }
 
-        cardCount.text = GetNumCards().ToString();
+        UpdateCardText();
+    }
+
+    void UpdateCardText()
+    {
+        int tensNum = Mathf.FloorToInt(GetNumCards()/10f);
+        int onesNum = GetNumCards() % 10;
+
+        tens.sprite = GameManager.Get().Didgets[tensNum];
+        ones.sprite = GameManager.Get().Didgets[onesNum];
     }
 
     public void AddCardToEnd(in CardData cardData)
     {
         cards.Add(cardData);
-        cardCount.text = GetNumCards().ToString();
+        
+        UpdateCardText();
     }
 
     public void AddAndShuffle(Deck deck)
@@ -41,7 +52,7 @@ public class Deck : MonoBehaviour
         cards.AddRange(deck.cards);
         deck.Empty();
         Shuffle();
-        cardCount.text = GetNumCards().ToString();
+        UpdateCardText();
     }
 
     void Shuffle()
@@ -59,14 +70,14 @@ public class Deck : MonoBehaviour
     {
         CardData retVal = cards[cards.Count - 1];
         cards.RemoveAt(cards.Count - 1);
-        cardCount.text = GetNumCards().ToString();
+        UpdateCardText();
         return retVal;
     }
 
     public void Empty()
     {
         cards.Clear();
-        cardCount.text = GetNumCards().ToString();
+        UpdateCardText();
     }
 }
 
