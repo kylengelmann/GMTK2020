@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerObject : CharacterObject
 {
+
+    Animator bunnyAnimator;
+
     public override ObjectType GetObjectType() { return ObjectType.Player; }
 
 
@@ -13,4 +16,12 @@ public class PlayerObject : CharacterObject
 
         LevelManager.Get().playerObject = this;
     }
+
+    protected override IEnumerator PerformMove(Direction direction)
+    {
+
+        yield return base.PerformMove(direction);
+
+    }
+
 }

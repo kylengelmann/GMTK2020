@@ -8,8 +8,24 @@ public abstract class CharacterObject : LevelObject, IActionObject
     public AnimationCurve MoveCurve;
     public AnimationCurve BounceCurve;
 
+    bool isDefending;
+    Animator animaAnimator;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        animaAnimator = GetComponentInChildren<Animator>();
+
+        animaAnimator.SetInteger("dirintion", 2);
+    }
+
     public virtual Coroutine StartMove(Direction direction)
     {
+
+        int dirintion = (int)direction;
+        animaAnimator.SetInteger("dirintion", dirintion);
+
         return StartCoroutine(PerformMove(direction));
     }
 
@@ -44,14 +60,18 @@ public abstract class CharacterObject : LevelObject, IActionObject
         MoveGrid(direction);
     }
 
-    public virtual Coroutine StartAttack()
+    public virtual Coroutine StartAttack(Direction direction)
     {
-        return StartCoroutine(PerformAttack());
+        animaAnimator.SetInteger("attintck", (int) direction);
+        animaAnimator.ResetTrigger("actriggerion");
+        animaAnimator.SetTrigger("actriggerion");
+        animaAnimator.SetInteger("dirintion", (int) direction);
+        return StartCoroutine(PerformAttack(direction));
     }
 
-    protected virtual IEnumerator PerformAttack()
+    protected virtual IEnumerator PerformAttack(Direction direction)
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(moveTime);
     }
 
     public virtual Coroutine StartDefend()
@@ -61,6 +81,6 @@ public abstract class CharacterObject : LevelObject, IActionObject
 
     protected virtual IEnumerator PerformDefend()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(moveTime);
     }
 }

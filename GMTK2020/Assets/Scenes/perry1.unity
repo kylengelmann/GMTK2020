@@ -331,6 +331,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2471463470792315015, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471463470792315015, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471463470792315015, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471463470792315015, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471463470792315015, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3926570502946066809, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
         type: 3}
       propertyPath: m_Name
@@ -389,6 +414,11 @@ PrefabInstance:
     - target: {fileID: 5617402831757684714, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162198365920340140, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+        type: 3}
+      propertyPath: m_UpscaleRT
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1589,8 +1619,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -1, y: 0, z: 0}
-  m_Size: {x: 10, y: 8, z: 1}
+  m_Origin: {x: -1, y: -1, z: 0}
+  m_Size: {x: 10, y: 9, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2057,7 +2087,7 @@ PrefabInstance:
     - target: {fileID: 4167328024839950556, guid: af374480dd5cda2428ad43e3dbe983e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167328024839950556, guid: af374480dd5cda2428ad43e3dbe983e3,
         type: 3}
@@ -2103,6 +2133,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167328024946523849, guid: af374480dd5cda2428ad43e3dbe983e3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1753205982242350755, guid: 74ed484f578cf874193d19d33d280a97,
+        type: 3}
+    - target: {fileID: 4167328024946523849, guid: af374480dd5cda2428ad43e3dbe983e3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167328024946523849, guid: af374480dd5cda2428ad43e3dbe983e3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.7607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167328024946523849, guid: af374480dd5cda2428ad43e3dbe983e3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.7607844
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af374480dd5cda2428ad43e3dbe983e3, type: 3}

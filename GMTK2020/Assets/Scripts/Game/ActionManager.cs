@@ -43,7 +43,7 @@ public class ActionManager : Singleton<ActionManager>
                     yield return actionObject.StartMove(currentAction.direction);
                     break;
                 case ActionType.Attack:
-                    yield return actionObject.StartAttack();
+                    yield return actionObject.StartAttack(currentAction.direction);
                     break;
                 case ActionType.Defend:
                     yield return actionObject.StartDefend();

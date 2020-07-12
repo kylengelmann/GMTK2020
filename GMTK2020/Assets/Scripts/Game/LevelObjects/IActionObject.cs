@@ -6,7 +6,7 @@ public interface IActionObject
 {
     Coroutine StartMove(Direction direction);
 
-    Coroutine StartAttack();
+    Coroutine StartAttack(Direction direction);
 
     Coroutine StartDefend();
 }
