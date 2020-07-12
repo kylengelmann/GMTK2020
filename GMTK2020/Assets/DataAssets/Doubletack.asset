@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd97a9ae72117ab42a7460f07a625823, type: 3}
+  m_Name: Doubletack
+  m_EditorClassIdentifier: 
+  cardData:
+  - cardData:
+      actions: 0100000001000000
+      cost: 2
+      sprite: {fileID: 3929718611160277314, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+        type: 3}
+    numCards: 0
+  pickupDisplay: {fileID: 3929718611160277314, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+    type: 3}

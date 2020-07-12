@@ -7,6 +7,7 @@ public class LevelManager : Singleton<LevelManager>
 {
     public GameObject deckPrefab;
     public GameObject handPrefab;
+    public GameObject discardPrefab;
 
     public Transform deckPosiiton;
     public Transform handPosition;
@@ -34,7 +35,7 @@ public class LevelManager : Singleton<LevelManager>
         handGO.transform.localPosition = Vector3.zero;
         hand = handGO.GetComponent<Hand>();
 
-        GameObject discardGO = Instantiate(deckPrefab, discardPosition);
+        GameObject discardGO = Instantiate(discardPrefab, discardPosition);
         discardGO.transform.localPosition = Vector3.zero;
         discard = discardGO.GetComponent<Deck>();
 
