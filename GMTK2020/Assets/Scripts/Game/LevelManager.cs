@@ -17,6 +17,9 @@ public class LevelManager : Singleton<LevelManager>
     public Hand hand {get; private set;}
     public Deck discard {get; private set;}
 
+    public float showCardTime = 3f;
+    public SpriteRenderer cardDisplay;
+
     [NonSerialized] public PlayerObject playerObject;
 
     public EnemyManager enemyManager {get; private set;}
@@ -137,7 +140,22 @@ public class LevelManager : Singleton<LevelManager>
 
     public void DisplayCardPickup(Sprite sprite)
     {
+        StartCoroutine(ShowCard(sprite));
+    }
 
+    void SetPause(bool bPause)
+    {
+        ActionManager.Get().bPaused = bPause;
+        hand.bPaused = bPause;
+    }
+
+    IEnumerator ShowCard(Sprite sprite)
+    {
+        SetPause(true);
+        cardDisplay.sprite = sprite;
+        yield return new WaitForSeconds(showCardTime);
+        cardDisplay.sprite = null;
+        SetPause(false);
     }
 }
 

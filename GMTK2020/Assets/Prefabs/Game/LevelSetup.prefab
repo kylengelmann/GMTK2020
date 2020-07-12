@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c295227503a7e5a4e8b4530ed79c180d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bPaused: 0
 --- !u!1 &8023610661355291102
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +96,8 @@ MonoBehaviour:
   deckPosiiton: {fileID: 8649174800535369608}
   handPosition: {fileID: 4700662604147663032}
   discardPosition: {fileID: 7238666828558728365}
+  showCardTime: 1
+  cardDisplay: {fileID: 7176385915389963770}
 --- !u!1 &8023610661526547095
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,16 +329,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8023610661526547092}
     m_Modifications:
-    - target: {fileID: 523220653524689893, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1963070184259479744, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3926570502946066809, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
         type: 3}
       propertyPath: m_Name
@@ -419,6 +412,12 @@ Transform:
 --- !u!4 &7238666828558728365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1963070184259479744, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9172373176059368557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7176385915389963770 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2079946393823771031, guid: 45ff6d9f4cc1e3146b4abc7e9dc7502e,
     type: 3}
   m_PrefabInstance: {fileID: 9172373176059368557}
   m_PrefabAsset: {fileID: 0}

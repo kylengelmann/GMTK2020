@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CardPickup : PickupObject
 {
-    public DeckData cardPackData;
+    public DeckData[] cardPackDatas;
 
     public override void OnPickedUp()
     {
-        if(cardPackData)
+        if(cardPackDatas.Length > 0)
         {
+            DeckData cardPackData = cardPackDatas[Mathf.FloorToInt(Random.Range(0, cardPackDatas.Length))];
             GameManager.Get().AddCardPack(cardPackData);
+            LevelManager.Get().deck.AddCardPack(cardPackData.cardData);
             LevelManager.Get().DisplayCardPickup(cardPackData.pickupDisplay);
         }
         base.OnPickedUp();

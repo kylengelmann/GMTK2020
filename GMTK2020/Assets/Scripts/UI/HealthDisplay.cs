@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthDisplay : MonoBehaviour
+public class HealthDisplay : UIDisplay
 {
-    public Text text;
-
-    void Update()
+    protected override int GetDisplayNum()
     {
-        text.text = "X" + LevelManager.Get().playerObject.GetHealth().ToString();
+        return LevelManager.Get().playerObject.GetHealth();
     }
 }

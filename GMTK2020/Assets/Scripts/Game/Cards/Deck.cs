@@ -16,19 +16,7 @@ public class Deck : MonoBehaviour
     {
         cards = new List<CardData>();
 
-        if(inDeckData != null)
-        {
-            for(int i = 0; i < inDeckData.Length; ++i)
-            {
-                for(int j = 0; j < inDeckData[i].numCards; j++)
-                {
-                    cards.Add(inDeckData[i].cardData);
-                }
-            }
-            Shuffle();
-        }
-
-        UpdateCardText();
+        AddCardPack(inDeckData);
     }
 
     void UpdateCardText()
@@ -44,6 +32,23 @@ public class Deck : MonoBehaviour
     {
         cards.Add(cardData);
         
+        UpdateCardText();
+    }
+
+    public void AddCardPack(in DeckCardData[] inDeckData)
+    {
+        if (inDeckData != null)
+        {
+            for (int i = 0; i < inDeckData.Length; ++i)
+            {
+                for (int j = 0; j < inDeckData[i].numCards; j++)
+                {
+                    cards.Add(inDeckData[i].cardData);
+                }
+            }
+            Shuffle();
+        }
+
         UpdateCardText();
     }
 

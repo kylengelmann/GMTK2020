@@ -70,7 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 318953615281452700, guid: 74ed484f578cf874193d19d33d280a97, type: 3}
+  m_Sprite: {fileID: -6050296909894318094, guid: 74ed484f578cf874193d19d33d280a97,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,8 +91,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9048522706120428033}
-  - component: {fileID: 6981020918134007825}
   - component: {fileID: 5792568830439276177}
+  - component: {fileID: 3952081531598568417}
   m_Layer: 0
   m_Name: CardPickup
   m_TagString: Untagged
@@ -114,18 +115,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6981020918134007825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9048522706120428063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 545cb2d043ee1c44fae343e8525a14d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &5792568830439276177
 Animator:
   serializedVersion: 3
@@ -145,3 +134,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3952081531598568417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048522706120428063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de099ee87572b8248a10a58a4eed4b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPackDatas:
+  - {fileID: 11400000, guid: 36f55a482785a1f4f863eb8c2162b47e, type: 2}
+  - {fileID: 11400000, guid: edf0176a0980c4246a6c4f132d25539a, type: 2}
