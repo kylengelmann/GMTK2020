@@ -1,15 +1,20 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public abstract class CharacterObject : LevelObject, IActionObject
+public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
 {
     [SerializeField] float moveTime = .5f;
     public AnimationCurve MoveCurve;
     public AnimationCurve BounceCurve;
 
-    bool isDefending;
     Animator animaAnimator;
+
+    [SerializeField] int health = 1;
+
+    public int GetHealth() {return health;}
+
+    public Action OnCharacterDeath;
 
     protected override void Start()
     {
@@ -72,6 +77,28 @@ public abstract class CharacterObject : LevelObject, IActionObject
     protected virtual IEnumerator PerformAttack(Direction direction)
     {
         yield return new WaitForSeconds(moveTime);
+        Vector2Int attackCell = GetGridCell();
+        switch(direction)
+        {
+            case Direction.North:
+                attackCell += Vector2Int.up;
+                break;
+            case Direction.South:
+                attackCell += Vector2Int.down;
+                break;
+            case Direction.East:
+                attackCell += Vector2Int.right;
+                break;
+            case Direction.West:
+                attackCell += Vector2Int.left;
+                break;
+        }
+        IDamageable damageable = LevelGrid.Get().GetObjectAtGridPosition(attackCell) as IDamageable;
+        if(damageable != null)
+        {
+            damageable.Damage();
+        }
+
     }
 
     public virtual Coroutine StartDefend()
@@ -82,5 +109,24 @@ public abstract class CharacterObject : LevelObject, IActionObject
     protected virtual IEnumerator PerformDefend()
     {
         yield return new WaitForSeconds(moveTime);
+    }
+
+    public void Damage()
+    {
+        health--;
+        if(health < 1)
+        {
+            if(OnCharacterDeath != null)
+            {
+                OnCharacterDeath.Invoke();
+            }
+            OnDeath();
+        }
+    }
+
+    protected virtual void OnDeath()
+    {
+        LevelGrid.Get().UnregisterLevelObject(this);
+        Destroy(gameObject);
     }
 }

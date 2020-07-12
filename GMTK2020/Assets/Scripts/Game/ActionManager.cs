@@ -14,6 +14,17 @@ public class ActionManager : Singleton<ActionManager>
         bIsProcessingQueue = false;
     }
 
+    private void Start()
+    {
+        LevelManager.Get().OnPlayerDied += OnPlayerDied;
+    }
+
+    bool bFreeze = false;
+    void OnPlayerDied()
+    {
+        bFreeze = true;
+    }
+
     public bool bIsProcessingQueue {get; private set;}
 
     public void AddActionToQueue(ActionData actionData)
@@ -36,6 +47,10 @@ public class ActionManager : Singleton<ActionManager>
         ActionData currentAction;
         while(ActionQueue.Count > 0)
         {
+            while(bFreeze)
+            {
+                yield return null;
+            }
             currentAction = ActionQueue.Dequeue();
             switch(currentAction.type)
             {

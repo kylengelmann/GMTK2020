@@ -361,28 +361,22 @@ PrefabInstance:
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: sceneIdxs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: sceneIdxs.Array.data[0]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
-        type: 3}
-      propertyPath: sceneIdxs.Array.data[1]
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
-      propertyPath: startingDeck
-      value: 
-      objectReference: {fileID: 11400000, guid: 8e8dc2c6d9794e744a6092473aefed9d,
-        type: 2}
+      propertyPath: sceneIdxs.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: DEBUG_LevelToOpen
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}

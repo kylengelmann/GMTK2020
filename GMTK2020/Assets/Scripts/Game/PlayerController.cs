@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerObject = GetComponent<PlayerObject>();
+        playerObject.OnCharacterDeath += OnPlayerDied;
 
         gameControls = new GameControls();
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
         gameControls.Game.East.performed += OnEast;
         gameControls.Game.West.performed += OnWest;
         gameControls.Game.EndTurn.performed += OnEndTurn;
+        gameControls.Game.Reset.performed += OnResetLevel;
 
         gameControls.Enable();
 
@@ -65,6 +67,12 @@ public class PlayerController : MonoBehaviour
         LevelManager.Get().EndPlayerTurn();
     }
 
+    void OnResetLevel(InputAction.CallbackContext context)
+    {
+        LevelManager.Get().OnPlayerDeath();
+    }
+
+
 
 
     private void OnDestroy()
@@ -90,5 +98,10 @@ public class PlayerController : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 0f));
 
         LevelManager.Get().hand.UpdateCardHover(mousePos);
+    }
+
+    void OnPlayerDied()
+    {
+        LevelManager.Get().OnPlayerDeath();
     }
 }

@@ -21,6 +21,11 @@ public class EnemyManager : MonoBehaviour
         enemies.Add(enemy);
     }
 
+    public void UnregisterEnemy(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+    }
+
     void OnLevelStateChanged(LevelState levelState)
     {
         if(levelState == LevelState.EnemyTurn)

@@ -15,6 +15,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<DeckCardData> currentDeck { get; private set; }
 
+    public Sprite[] Didgets;
+
     [Header("Debug")]
     [SerializeField] private int DEBUG_LevelToOpen = 0;
 
@@ -46,6 +48,14 @@ public class GameManager : Singleton<GameManager>
         if (currentLevel < sceneIdxs.Length - 1)
         {
             LoadLevel(currentLevel + 1);
+        }
+    }
+
+    public void ResetLevel()
+    {
+        if (currentLevel < sceneIdxs.Length)
+        {
+            LoadLevel(currentLevel);
         }
     }
 

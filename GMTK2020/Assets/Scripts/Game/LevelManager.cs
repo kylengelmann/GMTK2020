@@ -20,6 +20,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public EnemyManager enemyManager {get; private set;}
 
+    public Action OnPlayerDied;
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,12 +54,12 @@ public class LevelManager : Singleton<LevelManager>
         if(discard)
             discard.Init(null);
 
-        SetLevelState(LevelState.FadeIn);
         StartCoroutine(FadeIn(1f));
     }
 
     IEnumerator FadeIn(float fadeTime)
     {
+        SetLevelState(LevelState.FadeIn);
         yield return new WaitForSeconds(fadeTime);
         SetLevelState(LevelState.PlayerTurn);
     }
@@ -98,19 +100,35 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnPlayerMoveToDoor()
     {
-        SetLevelState(LevelState.FadeOut);
         StartCoroutine(FadeOut(1f));
     }
 
-    IEnumerator FadeOut(float FadeTime)
+    IEnumerator FadeOut(float FadeTime, bool bReset = false)
     {
+        SetLevelState(LevelState.FadeOut);
         yield return new WaitForSeconds(FadeTime);
-        GameManager.Get().LevelComplete();
+        if(bReset)
+        {
+            GameManager.Get().ResetLevel();
+        }
+        else
+        {
+            GameManager.Get().LevelComplete();
+        }
     }
 
     public void ShuffleDiscardIntoDeck()
     {
         deck.AddAndShuffle(discard);
+    }
+
+    public void OnPlayerDeath()
+    {
+        StartCoroutine(FadeOut(1f, true));
+        if(OnPlayerDied != null)
+        {
+            OnPlayerDied.Invoke();
+        }
     }
 }
 

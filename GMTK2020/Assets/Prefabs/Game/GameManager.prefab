@@ -47,4 +47,15 @@ MonoBehaviour:
   MaxEnergy: 5
   DiscardCost: 1
   startingDeck: {fileID: 11400000, guid: 8e8dc2c6d9794e744a6092473aefed9d, type: 2}
+  Didgets:
+  - {fileID: -6714890874683593676, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: 6950197416205941301, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: 3837952794806198086, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: -7588437301862679460, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: -8355147368116167396, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: 6989575011229674579, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: -1146751921650096553, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: 2354391935465653444, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: -3790605014940846563, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
+  - {fileID: 4070501149876957621, guid: 0e2dff278f0278a41b61bb892aec6959, type: 3}
   DEBUG_LevelToOpen: 0

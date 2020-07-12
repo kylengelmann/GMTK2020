@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
     public int movement = 1;
     protected EnemyObject enemyObject;
 
+    [SerializeField] protected int health = 1;
+
     protected virtual void Start()
     {
         enemyObject = GetComponent<EnemyObject>();
+        enemyObject.OnCharacterDeath += OnEnemyDied;
         LevelManager.Get().enemyManager.RegisterEnemy(this);
     }
 
@@ -45,5 +48,9 @@ public class Enemy : MonoBehaviour
         }
         yield return null;
     }
-    
+
+    protected virtual void OnEnemyDied()
+    {
+        LevelManager.Get().enemyManager.UnregisterEnemy(this);
+    }
 }
