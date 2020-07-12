@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
     {
         currentLevel++;
         currentLevel %= sceneIdxs.Length;
-        LoadLevel(currentLevel + 1);
+        LoadLevel(currentLevel);
     }
 
     public void ResetLevel()
