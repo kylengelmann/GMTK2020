@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/kyle1.unity
     guid: 55f1e0e53214471438d80a17a59f5735
+  - enabled: 1
+    path: Assets/Scenes/level_1.unity
+    guid: ca729ba9a1c4ff14e93691a501eba5a4
+  - enabled: 1
+    path: Assets/Scenes/level_2.unity
+    guid: dddc0665cf506f44ea65f739d99fcc2f
   m_configObjects: {}

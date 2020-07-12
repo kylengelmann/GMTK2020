@@ -30,6 +30,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
     public void StartTurn()
     {
         bIsDefending = false;
+        animaAnimator.SetBool("isDefending", bIsDefending);
     }
 
     public virtual Coroutine StartMove(Direction direction)
@@ -44,6 +45,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
     protected virtual IEnumerator PerformMove(Direction direction)
     {
         bIsDefending = false;
+        animaAnimator.SetBool("isDefending", bIsDefending);
         bool bCanMove = currentGrid.CanMoveDirection(GetGridCell(), direction);
         Vector3 startPosition = transform.position;
         float currentMoveTime = 0f;
@@ -76,6 +78,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
     public virtual Coroutine StartAttack(Direction direction)
     {
         bIsDefending = false;
+        animaAnimator.SetBool("isDefending", bIsDefending);
         animaAnimator.SetInteger("attintck", (int) direction);
         animaAnimator.ResetTrigger("actriggerion");
         animaAnimator.SetTrigger("actriggerion");
@@ -113,6 +116,8 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
     public virtual Coroutine StartDefend()
     {
         bIsDefending = true;
+        animaAnimator.SetBool("isDefending", bIsDefending);
+        animaAnimator.SetTrigger("defTrig");
         return StartCoroutine(PerformDefend());
     }
 
@@ -126,6 +131,7 @@ public abstract class CharacterObject : LevelObject, IActionObject, IDamageable
         if(bIsDefending)
         {
             bIsDefending = false;
+            animaAnimator.SetBool("isDefending", bIsDefending);
             return;
         }
         health--;
