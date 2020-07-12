@@ -20,7 +20,6 @@ public class Hand : MonoBehaviour
     {
         cards = new Card[cardPositions.Length];
         LevelManager.Get().OnLevelStateChange += OnLevelStateChange;
-        Energy = GameManager.Get().MaxEnergy;
     }
 
     void OnLevelStateChange(LevelState levelState)
@@ -28,6 +27,7 @@ public class Hand : MonoBehaviour
         if(levelState == LevelState.PlayerTurn)
         {
             FillHand();
+            Energy = GameManager.Get().MaxEnergy;
         }
     }
 
@@ -35,16 +35,16 @@ public class Hand : MonoBehaviour
     {
         while(NumCards < cardPositions.Length)
         {
-            if(LevelManager.Get().deck.GetNumCards() < 1)
-            {
-                LevelManager.Get().ShuffleDiscardIntoDeck();
-            }
             DrawCard();
         }
     }
 
     void DrawCard()
     {
+        if (LevelManager.Get().deck.GetNumCards() < 1)
+        {
+            LevelManager.Get().ShuffleDiscardIntoDeck();
+        }
         CreateCard(LevelManager.Get().deck.Draw());
     }
 
@@ -154,6 +154,7 @@ public class Hand : MonoBehaviour
             {
                 Energy -= GameManager.Get().DiscardCost;
                 Discard(selectedCardIdx);
+                DrawCard();
             }
         }
     }

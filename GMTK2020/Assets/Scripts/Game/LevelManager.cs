@@ -33,6 +33,8 @@ public class LevelManager : Singleton<LevelManager>
         GameObject discardGO = Instantiate(deckPrefab, discardPosition);
         discardGO.transform.localPosition = Vector3.zero;
         discard = discardGO.GetComponent<Deck>();
+
+        gameObject.AddComponent<EnemyManager>();
     }
 
     private void Start()

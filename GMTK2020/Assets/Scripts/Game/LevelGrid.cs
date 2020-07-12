@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class LevelGrid : Singleton<LevelGrid>
 {
@@ -81,9 +82,9 @@ public class LevelGrid : Singleton<LevelGrid>
                 break;
         }
 
-        if(newPosition == doorPosition) return true;
+        //if(newPosition == doorPosition) return true;
 
-        return IsValidGridPosition(newPosition) && gridData[newPosition.x, newPosition.y] == ObjectType.None;
+        return IsValidGridPosition(newPosition) && (gridData[newPosition.x, newPosition.y] == ObjectType.None || gridData[newPosition.x, newPosition.y] == ObjectType.Player);
         
     }
 
@@ -229,6 +230,120 @@ public class LevelGrid : Singleton<LevelGrid>
         float x = gridLocation.x * cellSize + transform.position.x;
         float y = gridLocation.y * cellSize + transform.position.y;
         return new Vector3(x, y, z);
+    }
+
+    public int FindShortestPathBetween(in Vector2Int start, in Vector2Int end, out Direction[] directions)
+    {
+        Queue<Vector2Int> searchPositions = new Queue<Vector2Int>();
+        int[,] distances = new int[size.x, size.y];
+        for(int x = 0; x < size.x; x++)
+        {
+            for(int y = 0; y < size.y; y++)
+            {
+                distances[x, y] = int.MaxValue;
+            }
+        }
+
+        searchPositions.Enqueue(start);
+        distances[start.x, start.y] = 0;
+        Vector2Int searchPos = start;
+        int currentDist = 0;
+        while (searchPositions.Count > 0)
+        {
+            searchPos = searchPositions.Dequeue();
+            currentDist = distances[searchPos.x, searchPos.y];
+            if(searchPos == end) break;
+
+            if(CanMoveDirection(searchPos, Direction.North))
+            {
+                Vector2Int newSearchPos = searchPos + Vector2Int.up;
+                if(newSearchPos == end)
+                {
+                    currentDist++;
+                    break;
+                }
+                if (distances[newSearchPos.x, newSearchPos.y] > currentDist + 1)
+                {
+                    distances[newSearchPos.x, newSearchPos.y] = currentDist + 1;
+                    searchPositions.Enqueue(newSearchPos);
+                }
+            }
+            if (CanMoveDirection(searchPos, Direction.South))
+            {
+                Vector2Int newSearchPos = searchPos + Vector2Int.down;
+                if (newSearchPos == end)
+                {
+                    currentDist++;
+                    break;
+                }
+                if (distances[newSearchPos.x, newSearchPos.y] > currentDist + 1)
+                {
+                    distances[newSearchPos.x, newSearchPos.y] = currentDist + 1;
+                    searchPositions.Enqueue(newSearchPos);
+                }
+            }
+            if (CanMoveDirection(searchPos, Direction.East))
+            {
+                Vector2Int newSearchPos = searchPos + Vector2Int.right;
+                if (newSearchPos == end)
+                {
+                    currentDist++;
+                    break;
+                }
+                if(distances[newSearchPos.x, newSearchPos.y] > currentDist + 1)
+                {
+                    distances[newSearchPos.x, newSearchPos.y] = currentDist + 1;
+                    searchPositions.Enqueue(newSearchPos);
+                }
+            }
+            if (CanMoveDirection(searchPos, Direction.West))
+            {
+                Vector2Int newSearchPos = searchPos + Vector2Int.left;
+                if (newSearchPos == end)
+                {
+                    currentDist++;
+                    break;
+                }
+                if (distances[newSearchPos.x, newSearchPos.y] > currentDist + 1)
+                {
+                    distances[newSearchPos.x, newSearchPos.y] = currentDist + 1;
+                    searchPositions.Enqueue(newSearchPos);
+                }
+            }
+        }
+        searchPos = end;
+        distances[end.x, end.y] = currentDist;
+        directions = new Direction[currentDist];
+        for(int i = currentDist - 1; i >= 0; --i)
+        {
+            if(IsValidGridPosition(searchPos + Vector2Int.up) && distances[searchPos.x, searchPos.y + 1] == i && CanMoveDirection(searchPos, Direction.North))
+            {
+                directions[i] = Direction.South;
+                searchPos += Vector2Int.up;
+            }
+            else if (IsValidGridPosition(searchPos + Vector2Int.down) && distances[searchPos.x, searchPos.y - 1] == i && CanMoveDirection(searchPos, Direction.South))
+            {
+                directions[i] = Direction.North;
+                searchPos += Vector2Int.down;
+            }
+            else if (IsValidGridPosition(searchPos + Vector2Int.left) && distances[searchPos.x - 1, searchPos.y] == i && CanMoveDirection(searchPos, Direction.West))
+            {
+                directions[i] = Direction.East;
+                searchPos += Vector2Int.left;
+            }
+            else if (IsValidGridPosition(searchPos + Vector2Int.right) && distances[searchPos.x + 1, searchPos.y] == i && CanMoveDirection(searchPos, Direction.East))
+            {
+                directions[i] = Direction.West;
+                searchPos += Vector2Int.right;
+            }
+            else
+            {
+                Debug.LogError("path find whoopsy doopsy");
+                break;
+            }
+        }
+
+        return currentDist;
     }
 }
 

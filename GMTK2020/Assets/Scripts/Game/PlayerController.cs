@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnEndTurn(InputAction.CallbackContext context)
     {
-        
+        LevelManager.Get().EndPlayerTurn();
     }
 
 
@@ -81,52 +81,6 @@ public class PlayerController : MonoBehaviour
     void OnLevelStateChange(LevelState levelState)
     {
 
-    }
-
-    private void OnMove(InputAction.CallbackContext context)
-    {
-        if(LevelManager.Get().levelState != LevelState.PlayerTurn)
-        {
-            return;
-        }
-
-        ActionData newAction;
-        newAction.type = ActionType.Move;
-
-        Vector2 direction = context.ReadValue<Vector2>();
-        if(direction.y > .5f)
-        {
-            newAction.direction = Direction.North;
-            Debug.Log("Up");
-        }
-        else if(direction.y < -.5f)
-        {
-            newAction.direction = Direction.South;
-            Debug.Log("Down");
-        }
-        else if (direction.x > .5f)
-        {
-            newAction.direction = Direction.East;
-            Debug.Log("Right");
-        }
-        else if (direction.x < -.5f)
-        {
-            newAction.direction = Direction.West;
-            Debug.Log("Left");
-        }
-        else return;
-
-        ActionManager.Get().AddActionToQueue(newAction);
-    }
-
-    private void ProcessQueue(InputAction.CallbackContext context)
-    {
-        if (LevelManager.Get().levelState != LevelState.PlayerTurn)
-        {
-            return;
-        }
-
-        ActionManager.Get().StartProcessingQueue(playerObject);
     }
 
     private void Update()
