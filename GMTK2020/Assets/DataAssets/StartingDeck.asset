@@ -16,12 +16,18 @@ MonoBehaviour:
   - cardData:
       actions: 00000000
       cost: 1
-    numCards: 5
+      sprite: {fileID: 8963368785945452489, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+        type: 3}
+    numCards: 10
   - cardData:
       actions: 01000000
       cost: 1
-    numCards: 2
+      sprite: {fileID: -7415955986125602904, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+        type: 3}
+    numCards: 3
   - cardData:
       actions: 02000000
-      cost: 1
+      cost: 0
+      sprite: {fileID: -2922113337684369405, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+        type: 3}
     numCards: 2

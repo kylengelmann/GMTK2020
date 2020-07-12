@@ -7,12 +7,6 @@ public class Card : MonoBehaviour
 {
     public CardData cardData {get; private set;}
 
-    public Sprite[] typeSprites;
-    public HorizontalLayoutGroup typeGroup;
-    public Text Cost;
-
-    public GameObject typeImagePrefab;
-
     new BoxCollider2D collider2D;
 
     bool bIsHovered = false;
@@ -27,16 +21,9 @@ public class Card : MonoBehaviour
     public void SetCardData(CardData newCardData)
     {
         cardData = newCardData;
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        renderer.sprite = cardData.sprite;
 
-        foreach(ActionType actionType in cardData.actions)
-        {
-            GameObject typeImageGO = Instantiate(typeImagePrefab, typeGroup.transform);
-            typeImageGO.transform.localPosition = new Vector3(typeImageGO.transform.localPosition.x, typeImageGO.transform.localPosition.y, 0f);
-            Image typeImage = typeImageGO.GetComponent<Image>();
-            typeImage.sprite = typeSprites[(int)actionType];
-        }
-
-        Cost.text = cardData.cost.ToString();
     }
 
     public void OnClicked()

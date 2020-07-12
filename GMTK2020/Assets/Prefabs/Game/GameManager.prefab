@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d26f63730a7d14493ca6332d07580b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData:
-  - SceneIdx: 1
+  sceneIdxs: 
+  MaxEnergy: 5
+  DiscardCost: 1
+  startingDeck: {fileID: 11400000, guid: 8e8dc2c6d9794e744a6092473aefed9d, type: 2}
   DEBUG_LevelToOpen: 0
