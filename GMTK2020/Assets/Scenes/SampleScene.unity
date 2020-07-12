@@ -361,7 +361,7 @@ PrefabInstance:
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: sceneIdxs.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
@@ -376,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: DEBUG_LevelToOpen
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
@@ -389,6 +389,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8e8dc2c6d9794e744a6092473aefed9d,
         type: 2}
+    - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
+        type: 3}
+      propertyPath: sceneIdxs.Array.data[3]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
+        type: 3}
+      propertyPath: sceneIdxs.Array.data[4]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644304889036579110, guid: 536a63af19732de4c98311d131f7c9ec,
+        type: 3}
+      propertyPath: sceneIdxs.Array.data[5]
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6644304889036579111, guid: 536a63af19732de4c98311d131f7c9ec,
         type: 3}
       propertyPath: m_Name
