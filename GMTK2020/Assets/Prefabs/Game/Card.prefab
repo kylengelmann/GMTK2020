@@ -218,9 +218,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeSprites:
-  - {fileID: 21300000, guid: 8588af329b8f4c249b52d87b4a01b42f, type: 3}
-  - {fileID: 21300000, guid: 8588af329b8f4c249b52d87b4a01b42f, type: 3}
-  - {fileID: 21300000, guid: 8588af329b8f4c249b52d87b4a01b42f, type: 3}
+  - {fileID: 8963368785945452489, guid: a0da4ba2e5d7b164c95297fb3c03d52c, type: 3}
+  - {fileID: -7415955986125602904, guid: a0da4ba2e5d7b164c95297fb3c03d52c, type: 3}
+  - {fileID: -2922113337684369405, guid: a0da4ba2e5d7b164c95297fb3c03d52c, type: 3}
   typeGroup: {fileID: 781787617066689032}
   Cost: {fileID: 781787618690200931}
   typeImagePrefab: {fileID: 4366038216962493148, guid: cd69e144c52e811488728bd9a7692c84,

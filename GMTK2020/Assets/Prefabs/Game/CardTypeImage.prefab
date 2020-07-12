@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6922039827906241272}
   - component: {fileID: 1800311983316687974}
   m_Layer: 0
-  m_Name: TypeImage
+  m_Name: CardTypeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 75, y: 75}
+  m_SizeDelta: {x: 250, y: 387.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6922039827906241272
 CanvasRenderer:
@@ -58,13 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8584906, g: 0.3280082, b: 0.3280082, a: 1}
+  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8588af329b8f4c249b52d87b4a01b42f, type: 3}
+  m_Sprite: {fileID: 8963368785945452489, guid: a0da4ba2e5d7b164c95297fb3c03d52c,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
