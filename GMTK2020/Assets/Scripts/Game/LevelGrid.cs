@@ -15,6 +15,8 @@ public class LevelGrid : Singleton<LevelGrid>
 
     public const float cellSize = 1f;
 
+    List<LevelObject> registeredObjects;
+
     protected override void Awake()
     {
         base.Awake();
@@ -47,6 +49,21 @@ public class LevelGrid : Singleton<LevelGrid>
                 verticalWallData[wallX, wallY] = false;
             }
         }
+
+        registeredObjects = new List<LevelObject>();
+    }
+
+    public LevelObject GetObjectAtGridPosition(in Vector2Int gridPosition)
+    {
+        foreach(LevelObject levelObject in registeredObjects)
+        {
+            if(levelObject.GetGridCell() == gridPosition)
+            {
+                return levelObject;
+            }
+        }
+
+        return null;
     }
 
     public bool IsValidGridPosition(in Vector2Int gridPosition)
@@ -141,12 +158,22 @@ public class LevelGrid : Singleton<LevelGrid>
             if(gridData[gridPosition.x, gridPosition.y] == ObjectType.None)
             {
                 gridData[gridPosition.x, gridPosition.y] = levelObject.GetObjectType();
+                registeredObjects.Add(levelObject);
             }
             else
             {
                 Debug.LogError("Tried to register " + levelObject.name + " to cell " + gridPosition.ToString() + 
                     " which is occupied by a(n) " + gridData[gridPosition.x, gridPosition.y].ToString());
             }
+        }
+    }
+
+    public void UnregisterLevelObject(LevelObject levelObject)
+    {
+        if(registeredObjects.Remove(levelObject))
+        {
+            Vector2Int pos = levelObject.GetGridCell();
+            gridData[pos.x, pos.y] = ObjectType.None;
         }
     }
 
@@ -316,22 +343,22 @@ public class LevelGrid : Singleton<LevelGrid>
         directions = new Direction[currentDist];
         for(int i = currentDist - 1; i >= 0; --i)
         {
-            if(IsValidGridPosition(searchPos + Vector2Int.up) && distances[searchPos.x, searchPos.y + 1] == i && CanMoveDirection(searchPos, Direction.North))
+            if(IsValidGridPosition(searchPos + Vector2Int.up) && distances[searchPos.x, searchPos.y + 1] == i && CanMoveDirection(searchPos + Vector2Int.up, Direction.South))
             {
                 directions[i] = Direction.South;
                 searchPos += Vector2Int.up;
             }
-            else if (IsValidGridPosition(searchPos + Vector2Int.down) && distances[searchPos.x, searchPos.y - 1] == i && CanMoveDirection(searchPos, Direction.South))
+            else if (IsValidGridPosition(searchPos + Vector2Int.down) && distances[searchPos.x, searchPos.y - 1] == i && CanMoveDirection(searchPos + Vector2Int.down, Direction.North))
             {
                 directions[i] = Direction.North;
                 searchPos += Vector2Int.down;
             }
-            else if (IsValidGridPosition(searchPos + Vector2Int.left) && distances[searchPos.x - 1, searchPos.y] == i && CanMoveDirection(searchPos, Direction.West))
+            else if (IsValidGridPosition(searchPos + Vector2Int.left) && distances[searchPos.x - 1, searchPos.y] == i && CanMoveDirection(searchPos + Vector2Int.left, Direction.East))
             {
                 directions[i] = Direction.East;
                 searchPos += Vector2Int.left;
             }
-            else if (IsValidGridPosition(searchPos + Vector2Int.right) && distances[searchPos.x + 1, searchPos.y] == i && CanMoveDirection(searchPos, Direction.East))
+            else if (IsValidGridPosition(searchPos + Vector2Int.right) && distances[searchPos.x + 1, searchPos.y] == i && CanMoveDirection(searchPos + Vector2Int.right, Direction.West))
             {
                 directions[i] = Direction.West;
                 searchPos += Vector2Int.right;

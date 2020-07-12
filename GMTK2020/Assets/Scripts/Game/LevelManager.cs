@@ -16,7 +16,9 @@ public class LevelManager : Singleton<LevelManager>
     public Hand hand {get; private set;}
     public Deck discard {get; private set;}
 
-    public PlayerObject playerObject;
+    [NonSerialized] public PlayerObject playerObject;
+
+    public EnemyManager enemyManager {get; private set;}
 
     protected override void Awake()
     {
@@ -34,7 +36,7 @@ public class LevelManager : Singleton<LevelManager>
         discardGO.transform.localPosition = Vector3.zero;
         discard = discardGO.GetComponent<Deck>();
 
-        gameObject.AddComponent<EnemyManager>();
+        enemyManager = gameObject.AddComponent<EnemyManager>();
     }
 
     private void Start()

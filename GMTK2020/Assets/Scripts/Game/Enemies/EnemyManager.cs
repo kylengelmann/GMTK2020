@@ -33,13 +33,16 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Enemy enemy in enemies)
         {
-            yield return enemy.StartTurn();
-            if(ActionManager.Get().bIsProcessingQueue)
+            while (ActionManager.Get().bIsProcessingQueue)
             {
                 yield return null;
             }
+            yield return enemy.StartTurn();
         }
-
+        while (ActionManager.Get().bIsProcessingQueue)
+        {
+            yield return null;
+        }
         LevelManager.Get().EndEnemyTurn();
     }
 }

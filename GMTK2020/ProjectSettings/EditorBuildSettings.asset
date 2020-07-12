@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/perry1.unity
     guid: 609d262d1a351164a9fec26bb2e0b848
+  - enabled: 1
+    path: Assets/Scenes/kyle1.unity
+    guid: 55f1e0e53214471438d80a17a59f5735
   m_configObjects: {}

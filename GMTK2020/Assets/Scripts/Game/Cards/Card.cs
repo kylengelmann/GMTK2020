@@ -11,8 +11,6 @@ public class Card : MonoBehaviour
 
     bool bIsHovered = false;
 
-    bool bIsActive = false;
-
     public void Awake()
     {
         collider2D = GetComponent<BoxCollider2D>();
